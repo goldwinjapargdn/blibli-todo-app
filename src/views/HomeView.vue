@@ -68,14 +68,14 @@ export default {
         }
       }
     },
-    debounceGetAnswer: _.debounce(function () {
+    debounceUpdateTodo: _.debounce(function () {
       this.saveTodo()
     }, 5000)
 
   },
   watch: {
     todos (val, prevVal) {
-      this.debounceGetAnswer()
+      this.debounceUpdateTodo()
     },
   }
 }
