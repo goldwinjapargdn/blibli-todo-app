@@ -28,13 +28,7 @@ export default {
     }
   },
   mounted(){
-    if (localStorage.getItem('todos')){
-      try{
-        this.todos = JSON.parse(localStorage.getItem('todos'))
-      }catch(e){
-        localStorage.removeItem('todos')
-      }
-    }
+    this.parseLocalStorage()
   },
   methods: {
     addTodo(newTodo) {
@@ -68,6 +62,15 @@ export default {
     saveTodo(){
       const parsed = JSON.stringify(this.todos)
       localStorage.setItem('todos', parsed)
+    },
+    checkLocalStorage(){
+      if (localStorage.getItem('todos')){
+        try{
+          this.todos = JSON.parse(localStorage.getItem('todos'))
+        }catch(e){
+          localStorage.removeItem('todos')
+        }
+      }
     }
   }
 }
