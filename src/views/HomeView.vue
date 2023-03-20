@@ -24,44 +24,34 @@ export default {
   },
   data() {
     return {
-      todos: [
-        {
-          id: 1,
-          text: 'Belajar Odoo',
-          isCompleted: false
-        },
-        {
-          id: 2,
-          text: 'Beli Hyundai Palisade',
-          isCompleted: false
-        },
-        {
-          id: 3,
-          text: 'Beli Indomie',
-          isCompleted: false
-        },
-        {
-          id: 4,
-          text: 'Ngudud bareng mas Sandi dan ko Juan',
-          isCompleted: true
-        }
-      ]
+      todos: []
+    }
+  },
+  mounted(){
+    if (localStorage.getItem('todos')){
+      try{
+        this.todos = JSON.parse(localStorage.getItem('todos'))
+      }catch(e){
+        localStorage.removeItem('todos')
+      }
     }
   },
   methods: {
     addTodo(newTodo) {
       if (!newTodo.text) return
       this.todos = [newTodo, ...this.todos]
-      // this.todos.push(newTodo)
+      this.saveTodo()
     },
     removeTodo(todoId) {
       this.todos = this.todos.filter(todo => todo.id !== todoId)
+      this.saveTodo()
     },
     completeTodo(todoId) {
       this.todos = this.todos.map(todo => {
         if (todo.id === todoId) {
           todo.isCompleted = !todo.isCompleted
         }
+        this.saveTodo()
         return todo
       })
     },
@@ -71,8 +61,13 @@ export default {
         if (todo.id === todoId) {
           todo.text = newTodo.text
         }
+        this.saveTodo()
         return todo
       })
+    },
+    saveTodo(){
+      const parsed = JSON.stringify(this.todos)
+      localStorage.setItem('todos', parsed)
     }
   }
 }
