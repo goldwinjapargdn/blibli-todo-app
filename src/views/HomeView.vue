@@ -15,7 +15,7 @@
 // @ is an alias to /src
 import TodoForm from '@/components/TodoForm'
 import TodoList from '@/components/TodoList'
-
+import _ from 'lodash'
 export default {
   name: 'HomeView',
   components: {
@@ -34,18 +34,15 @@ export default {
     addTodo(newTodo) {
       if (!newTodo.text) return
       this.todos = [newTodo, ...this.todos]
-      this.saveTodo()
     },
     removeTodo(todoId) {
-      this.todos = this.todos.filter(todo => todo.id !== todoId)
-      this.saveTodo()
+      this.todos = this.todos.filter(todo => todo.id !== todoId) 
     },
     completeTodo(todoId) {
       this.todos = this.todos.map(todo => {
         if (todo.id === todoId) {
           todo.isCompleted = !todo.isCompleted
         }
-        this.saveTodo()
         return todo
       })
     },
@@ -55,7 +52,6 @@ export default {
         if (todo.id === todoId) {
           todo.text = newTodo.text
         }
-        this.saveTodo()
         return todo
       })
     },
@@ -63,7 +59,7 @@ export default {
       const parsed = JSON.stringify(this.todos)
       localStorage.setItem('todos', parsed)
     },
-    checkLocalStorage(){
+    parseLocalStorage(){
       if (localStorage.getItem('todos')){
         try{
           this.todos = JSON.parse(localStorage.getItem('todos'))
@@ -71,7 +67,16 @@ export default {
           localStorage.removeItem('todos')
         }
       }
-    }
+    },
+    debounceGetAnswer: _.debounce(function () {
+      this.saveTodo()
+    }, 5000)
+
+  },
+  watch: {
+    todos (val, prevVal) {
+      this.debounceGetAnswer()
+    },
   }
 }
 </script>
