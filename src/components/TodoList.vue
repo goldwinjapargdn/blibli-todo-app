@@ -1,10 +1,10 @@
 <template>
   <TodoForm v-if="editData.id" :editData="editData" @submit="updateTodo" />
   <div v-else class="todo-list">
-    <div :class="['todo-row', { 'complete': todo.isCompleted }]"
+    <div :class="['todo-row', { 'complete': todo.completed }]"
          v-for="todo in todos"
          :key="todo.id">
-      <div @click="completeTodo(todo.id)">
+      <div @click="completeTodo(todo)">
         {{ todo.text }}
       </div>
       <div class="icons">
@@ -41,8 +41,8 @@ export default {
     TodoForm
   },
   methods: {
-    completeTodo (todoId) {
-      this.$emit('completeTodo', todoId)
+    completeTodo (todo) {
+      this.$emit('completeTodo', todo)
     },
     removeTodo (todoId) {
       this.$emit('removeTodo', todoId)

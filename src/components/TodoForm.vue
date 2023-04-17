@@ -40,7 +40,7 @@ export default {
   methods: {
     handleSubmit () {
       this.$emit('submit', {
-        id: Math.floor(Math.random() * 10000),
+        // id: Math.floor(Math.random() * 10000),
         text: this.text
       })
       this.reset()
