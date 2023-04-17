@@ -1,12 +1,12 @@
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import common from './modules/common'
+import todo from './modules/todo'
 
 console.log('[golz] api-mock/index.js loading mocks...')
 
 // Combine all of your API Mock Modules here
 const apiRoutes = [
-  ...common,
+  ...todo,
 ]
 
 /**

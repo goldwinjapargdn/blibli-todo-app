@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --mode development",
+    "serve-nomock": "cross-env NOMOCK=true vue-cli-service serve --mode development-nomock",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
@@ -11,8 +12,10 @@
   "dependencies": {
     "@vue-hero-icons/outline": "^1.7.2",
     "axios": "^1.3.4",
+    "axios-mock-adapter": "^1.21.4",
     "core-js": "^3.8.3",
     "lodash": "^4.17.21",
+    "path": "^0.12.7",
     "register-service-worker": "^1.7.2",
     "vue": "^2.6.14",
     "vue-router": "^3.5.1",

@@ -7,6 +7,8 @@ import './assets/scss/main.scss'
 
 Vue.config.productionTip = false
 
+require('@api-mock')
+
 new Vue({
   router,
   store,
