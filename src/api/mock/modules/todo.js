@@ -6,22 +6,22 @@ export default [
       {
         id: 1,
         text: 'Belajar Odoo',
-        isCompleted: false
+        completed: false
       },
       {
         id: 2,
         text: 'Beli Hyundai Palisade',
-        isCompleted: false
+        completed: false
       },
       {
         id: 3,
         text: 'Beli Indomie',
-        isCompleted: false
+        completed: false
       },
       {
         id: 4,
         text: 'Ngudud bareng mas Sandi dan ko Juan',
-        isCompleted: true
+        completed: true
       }
     ]
   },
